@@ -90,11 +90,13 @@ public class Main {
             boolean randomBool = ThreadLocalRandom.current().nextBoolean();
 
             // Assign new Slum object to array index
-            task5[i] = new Slum(randomBool, (long)randomNum, randomBool);
+            task5[i] = new Slum(false, (long)randomNum, randomBool);
 
             // Cast to Slum
             Slum currentSlum = (Slum) task5[i];
-            System.out.print("Net Worth: " + currentSlum.netWorth + ", Is slum clean? " + currentSlum.isClean + ", is it destroyed? " + currentSlum.destroyed + '\n');
+            // Use printf for cleaner formatting
+            // '%,d' for comma-separated thousands
+            System.out.printf("Net Worth: %,d, Is slum clean? %b, is it destroyed? %b\n", currentSlum.netWorth, currentSlum.isClean, currentSlum.destroyed);
         }
     }
 }
