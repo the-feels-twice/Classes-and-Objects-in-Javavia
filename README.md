@@ -1,1 +1,1 @@
-Everything in the commit history
+Everything is in the commit history
