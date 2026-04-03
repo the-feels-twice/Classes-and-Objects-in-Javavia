@@ -1,14 +1,17 @@
+import java.util.concurrent.ThreadLocalRandom;
+
+
 class House {
     boolean destroyed = false;
-    long networth = 0L;
+    long netWorth = 0L;
 
     public House(boolean isDestroyed) {
         this(isDestroyed, 0L);
     }
 
-    public House(boolean isDestroyed, long networth) {
+    public House(boolean isDestroyed, long netWorth) {
         destroyed = isDestroyed;
-        this.networth = networth;
+        this.netWorth = netWorth;
     }
 
     public void destroy() {
@@ -17,6 +20,15 @@ class House {
 
     public void rebuild() {
         this.destroyed = false;
+    }
+}
+
+class Slum extends House {
+    boolean isClean = false;
+
+    public Slum(boolean isDestroyed, long netWorth, boolean isClean) {
+        super(isDestroyed, netWorth);
+        this.isClean = isClean;
     }
 }
 
@@ -37,6 +49,10 @@ public class Main {
                 new House(false, 8230000000L),
                 new House(false, 11000670000L),
         };
+
+        House[] task5 = new Slum[12];
+        int min = 1000;
+        int max = 10000;
 
         System.out.print("---------- Task #1 ----------\n");
         System.out.print("Is house one destroyed? " + task1.destroyed + '\n');
@@ -59,11 +75,26 @@ public class Main {
         System.out.print("---------- Task #4 ----------\n");
 
         for (House house : task4) {
-           if (house.networth < 8640000000L) {
+           if (house.netWorth < 8640000000L) {
                house.destroy();
            }
 
            System.out.print("Is house worth enough? " + house.destroyed + '\n');
+        }
+
+        System.out.print("---------- Task #5 ----------\n");
+
+        for (int i = 0; i < task5.length; i++) {
+            // Generate new values
+            int randomNum = ThreadLocalRandom.current().nextInt(min, max);
+            boolean randomBool = ThreadLocalRandom.current().nextBoolean();
+
+            // Assign new Slum object to array index
+            task5[i] = new Slum(randomBool, (long)randomNum, randomBool);
+
+            // Cast to Slum
+            Slum currentSlum = (Slum) task5[i];
+            System.out.print("Net Worth: " + currentSlum.netWorth + ", Is slum clean? " + currentSlum.isClean + ", is it destroyed? " + currentSlum.destroyed + '\n');
         }
     }
 }
