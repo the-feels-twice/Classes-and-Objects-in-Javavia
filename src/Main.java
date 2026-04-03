@@ -1,12 +1,28 @@
 class House {
     boolean destroyed = false;
+
+    public House(boolean isDestroyed) {
+        destroyed = isDestroyed;
+    }
 }
 
 public class Main {
     public static void main(String[] args) {
-        House house1 = new House();
-        house1.destroyed = true;
+        House task1 = new House(true);
 
-        System.out.print("Is house one destroyed? " + house1.destroyed + '\n');
+        House[] task2 = {
+                new House(true),
+                new House(false),
+                new House(true)
+        };
+
+
+        System.out.print("---------- Task #1 ----------\n");
+        System.out.print("Is house one destroyed? " + task1.destroyed + '\n');
+
+        System.out.print("---------- Task #2 ----------\n");
+        for (House house : task2) {
+            System.out.print("Is house destroyed? " + house.destroyed + '\n');
+        }
     }
 }
